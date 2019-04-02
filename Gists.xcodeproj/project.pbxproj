@@ -16,6 +16,8 @@
 		9F5F643B22533DC800E2C8ED /* GistsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F643A22533DC800E2C8ED /* GistsUITests.swift */; };
 		9F5F64492253481700E2C8ED /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F64482253481700E2C8ED /* MasterViewController.swift */; };
 		9F5F644B2253489A00E2C8ED /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F644A2253489A00E2C8ED /* DetailViewController.swift */; };
+		9FE033852253671C00A7C7AF /* GistRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE033842253671C00A7C7AF /* GistRouter.swift */; };
+		9FE033872253674700A7C7AF /* GitHubAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE033862253674700A7C7AF /* GitHubAPIManager.swift */; };
 		A9A5761D3A0EE65B6241EBD6 /* Pods_Gists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84DDAA0B5CF5583DF3311C05 /* Pods_Gists.framework */; };
 		BA27396E0CF4265382B9F246 /* Pods_GistsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03AF9DF49ED77F3AB8517BB8 /* Pods_GistsTests.framework */; };
 /* End PBXBuildFile section */
@@ -58,6 +60,8 @@
 		9F5F643C22533DC800E2C8ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F5F64482253481700E2C8ED /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		9F5F644A2253489A00E2C8ED /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		9FE033842253671C00A7C7AF /* GistRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GistRouter.swift; sourceTree = "<group>"; };
+		9FE033862253674700A7C7AF /* GitHubAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAPIManager.swift; sourceTree = "<group>"; };
 		B15227673FF7DBFDE35233BD /* Pods-Gists.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gists.release.xcconfig"; path = "Target Support Files/Pods-Gists/Pods-Gists.release.xcconfig"; sourceTree = "<group>"; };
 		CA2C2252F9FE8BD8C55CD59C /* Pods-GistsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GistsTests.release.xcconfig"; path = "Target Support Files/Pods-GistsTests/Pods-GistsTests.release.xcconfig"; sourceTree = "<group>"; };
 		CA9B58D1ED9183B77B7AA2AE /* Pods-GistsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GistsUITests.release.xcconfig"; path = "Target Support Files/Pods-GistsUITests/Pods-GistsUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -129,6 +133,7 @@
 		9F5F641922533DC700E2C8ED /* Gists */ = {
 			isa = PBXGroup;
 			children = (
+				9FE03383225366E800A7C7AF /* NetWorking */,
 				9F5F641A22533DC700E2C8ED /* AppDelegate.swift */,
 				9F5F641C22533DC700E2C8ED /* ViewController.swift */,
 				9F5F642122533DC800E2C8ED /* Assets.xcassets */,
@@ -156,6 +161,15 @@
 				9F5F643C22533DC800E2C8ED /* Info.plist */,
 			);
 			path = GistsUITests;
+			sourceTree = "<group>";
+		};
+		9FE03383225366E800A7C7AF /* NetWorking */ = {
+			isa = PBXGroup;
+			children = (
+				9FE033842253671C00A7C7AF /* GistRouter.swift */,
+				9FE033862253674700A7C7AF /* GitHubAPIManager.swift */,
+			);
+			path = NetWorking;
 			sourceTree = "<group>";
 		};
 		C1BEE3CA8098A095878E9DFE /* Frameworks */ = {
@@ -398,7 +412,9 @@
 				9F5F641D22533DC700E2C8ED /* ViewController.swift in Sources */,
 				9F5F641B22533DC700E2C8ED /* AppDelegate.swift in Sources */,
 				9F5F64492253481700E2C8ED /* MasterViewController.swift in Sources */,
+				9FE033852253671C00A7C7AF /* GistRouter.swift in Sources */,
 				9F5F644B2253489A00E2C8ED /* DetailViewController.swift in Sources */,
+				9FE033872253674700A7C7AF /* GitHubAPIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
