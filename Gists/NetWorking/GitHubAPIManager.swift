@@ -13,12 +13,16 @@ import SwiftyJSON
 class GitHubAPIManager {
     static let shared = GitHubAPIManager()
     
-    func printPublicGists() {
+    var alamofireManager = Alamofire.SessionManager()
+    init () {
+        let configuration = URLSessionConfiguration.default
+        alamofireManager = Alamofire.SessionManager(configuration: configuration)
+    }
+    
+    func printPublicGists(completionHandler: @escaping ((Result<[Gist]>)) -> Void) {
         Alamofire.request(GistRouter.GetPublic)
-            .responseString { (response) in
-                if let responseString = response.result.value {
-                    print(responseString)
-                }
+            .responseArray(queue: nil) { (response) in
+                completionHandler(response.result)
         }
     }
 }

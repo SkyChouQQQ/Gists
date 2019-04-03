@@ -9,7 +9,9 @@
 import UIKit
 
 class DetailViewController:UIViewController {
+    var gist:Gist?
     override func viewDidLoad() {
         super.viewDidLoad()
+    view.backgroundColor = .blue
     }
 }
