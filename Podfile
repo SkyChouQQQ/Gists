@@ -8,6 +8,7 @@ target 'Gists' do
   # Pods for Gists
     pod 'Alamofire', '~> 4.4' 
     pod 'SwiftyJSON'
+    pod 'PINRemoteImage'
 
   target 'GistsTests' do
     inherit! :search_paths

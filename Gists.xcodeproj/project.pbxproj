@@ -21,6 +21,8 @@
 		9FEF0AA22254AEDD00B24B1A /* ResponseJSONObjectSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF0AA12254AEDD00B24B1A /* ResponseJSONObjectSerializable.swift */; };
 		9FEF0AA52254AF7B00B24B1A /* AlamofireRequest+JSONSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF0AA42254AF7B00B24B1A /* AlamofireRequest+JSONSerializable.swift */; };
 		9FEF0AA72254B46000B24B1A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF0AA62254B46000B24B1A /* Errors.swift */; };
+		9FEF0AAA2254D58000B24B1A /* UIImage+GistAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF0AA92254D58000B24B1A /* UIImage+GistAPIManager.swift */; };
+		9FEF0AAD2254DE9E00B24B1A /* GistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEF0AAC2254DE9E00B24B1A /* GistCell.swift */; };
 		A9A5761D3A0EE65B6241EBD6 /* Pods_Gists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84DDAA0B5CF5583DF3311C05 /* Pods_Gists.framework */; };
 		BA27396E0CF4265382B9F246 /* Pods_GistsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03AF9DF49ED77F3AB8517BB8 /* Pods_GistsTests.framework */; };
 /* End PBXBuildFile section */
@@ -68,6 +70,8 @@
 		9FEF0AA12254AEDD00B24B1A /* ResponseJSONObjectSerializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseJSONObjectSerializable.swift; sourceTree = "<group>"; };
 		9FEF0AA42254AF7B00B24B1A /* AlamofireRequest+JSONSerializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlamofireRequest+JSONSerializable.swift"; sourceTree = "<group>"; };
 		9FEF0AA62254B46000B24B1A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		9FEF0AA92254D58000B24B1A /* UIImage+GistAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+GistAPIManager.swift"; sourceTree = "<group>"; };
+		9FEF0AAC2254DE9E00B24B1A /* GistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GistCell.swift; sourceTree = "<group>"; };
 		B15227673FF7DBFDE35233BD /* Pods-Gists.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gists.release.xcconfig"; path = "Target Support Files/Pods-Gists/Pods-Gists.release.xcconfig"; sourceTree = "<group>"; };
 		CA2C2252F9FE8BD8C55CD59C /* Pods-GistsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GistsTests.release.xcconfig"; path = "Target Support Files/Pods-GistsTests/Pods-GistsTests.release.xcconfig"; sourceTree = "<group>"; };
 		CA9B58D1ED9183B77B7AA2AE /* Pods-GistsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GistsUITests.release.xcconfig"; path = "Target Support Files/Pods-GistsUITests/Pods-GistsUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -139,6 +143,8 @@
 		9F5F641922533DC700E2C8ED /* Gists */ = {
 			isa = PBXGroup;
 			children = (
+				9FEF0AAB2254DE9100B24B1A /* Cell */,
+				9FEF0AA82254D55700B24B1A /* Utils */,
 				9FEF0AA02254AEB500B24B1A /* Protocol */,
 				9FE0338A225368E300A7C7AF /* Model */,
 				9FE03389225367D500A7C7AF /* Base */,
@@ -219,6 +225,22 @@
 				9FEF0AA42254AF7B00B24B1A /* AlamofireRequest+JSONSerializable.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		9FEF0AA82254D55700B24B1A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9FEF0AA92254D58000B24B1A /* UIImage+GistAPIManager.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		9FEF0AAB2254DE9100B24B1A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9FEF0AAC2254DE9E00B24B1A /* GistCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		C1BEE3CA8098A095878E9DFE /* Frameworks */ = {
@@ -415,6 +437,9 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Gists/Pods-Gists-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
+				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -422,6 +447,9 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,8 +487,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F5F641B22533DC700E2C8ED /* AppDelegate.swift in Sources */,
+				9FEF0AAD2254DE9E00B24B1A /* GistCell.swift in Sources */,
 				9F5F64492253481700E2C8ED /* MasterViewController.swift in Sources */,
 				9FEF0AA22254AEDD00B24B1A /* ResponseJSONObjectSerializable.swift in Sources */,
+				9FEF0AAA2254D58000B24B1A /* UIImage+GistAPIManager.swift in Sources */,
 				9FE0338C225368F400A7C7AF /* Gist.swift in Sources */,
 				9FE033852253671C00A7C7AF /* GistRouter.swift in Sources */,
 				9F5F644B2253489A00E2C8ED /* DetailViewController.swift in Sources */,

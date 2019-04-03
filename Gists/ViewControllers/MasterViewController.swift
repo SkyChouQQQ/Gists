@@ -19,7 +19,7 @@ class MasterViewController:UITableViewController {
         super.viewDidLoad()
         
         setupNaviBarUI()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(GistCell.self, forCellReuseIdentifier: cellId)
 
     }
     
@@ -93,16 +93,17 @@ extension MasterViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return gists.count
     }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let gist = gists[indexPath.row]
-        var cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle,reuseIdentifier: cellId)
-        cell.textLabel?.text = gist.description
-        cell.detailTextLabel?.text = gist.ownerLogin
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! GistCell
+        cell.gist = gist
         return cell
     }
     
@@ -113,7 +114,6 @@ extension MasterViewController {
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
