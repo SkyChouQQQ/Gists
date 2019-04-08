@@ -40,7 +40,6 @@ class MasterViewController:UITableViewController {
         
        
         
-        loadGists()
 
 //        GitHubAPIManager.shared.printMyStarredGistsWithBasicAuth()
     }
@@ -58,6 +57,18 @@ class MasterViewController:UITableViewController {
         
     }
     
+    @objc func segmentControlIndexChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex{
+        case 0:
+            loadPublicGists()
+        case 1:
+            loadStarrredGists()
+        case 2:
+            loadMyGists()
+        default:
+            break
+        }
+    }
     //MARK:- UI
     fileprivate func editButtonItem()->UIBarButtonItem {
         return UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editGist))
@@ -68,10 +79,28 @@ class MasterViewController:UITableViewController {
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addGist))
         self.navigationItem.rightBarButtonItem = addButton
-
+        
+        setupNaviTitleViewWithSegmentControl()
+    }
+    fileprivate func setupNaviTitleViewWithSegmentControl() {
+        let customView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 250))
+        let items = ["All" , "Star","My Gists"]
+        let segmentedControl = UISegmentedControl(items : items)
+        segmentedControl.center = self.view.center
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.addTarget(self, action: #selector(segmentControlIndexChanged), for: .valueChanged)
+        
+        segmentedControl.layer.cornerRadius = 5.0
+        segmentedControl.backgroundColor = .white
+        segmentedControl.tintColor = .blue
+        
+        customView.addSubview(segmentedControl)
+        segmentedControl.frame = CGRect(x: 0, y: 0, width: self.view.frame.width * 0.75, height: 30)
+        
+        
+        navigationItem.titleView = customView
     }
     
-
     
     //MARK:- memory warning
     override func didReceiveMemoryWarning() {

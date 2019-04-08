@@ -13,8 +13,36 @@ import SafariServices
 extension MasterViewController:LoginViewDelegate,SFSafariViewControllerDelegate {
 
     
-    func loadGists() {
+    func loadPublicGists() {
         GitHubAPIManager.shared.printPublicGists { (result) in
+            guard result.error == nil else {
+                print(result.error)
+                // TODO: display error
+                return
+            }
+            if let fetchedGists = result.value {
+                self.gists = fetchedGists
+            }
+            self.tableView.reloadData()
+        }
+        
+    }
+    func loadStarrredGists() {
+        GitHubAPIManager.shared.printMyStarredGistsWithOAuth2 { (result) in
+            guard result.error == nil else {
+                print(result.error)
+                // TODO: display error
+                return
+            }
+            if let fetchedGists = result.value {
+                self.gists = fetchedGists
+            }
+            self.tableView.reloadData()
+        }
+        
+    }
+    func loadMyGists() {
+        GitHubAPIManager.shared.printMyGists { (result) in
             guard result.error == nil else {
                 print(result.error)
                 // TODO: display error
@@ -36,7 +64,7 @@ extension MasterViewController:LoginViewDelegate,SFSafariViewControllerDelegate 
                 // Something went wrong, try again
                 self.showOAuthLoginView()
             } else {
-                self.loadGists()
+                self.loadPublicGists()
             }
         }
         

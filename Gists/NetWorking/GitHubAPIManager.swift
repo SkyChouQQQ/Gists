@@ -61,7 +61,7 @@ class GitHubAPIManager {
                 
         }
     }
-    func getMyGists(completionHandler: @escaping ((Result<[Gist]>)) -> Void) {
+    func printMyGists(completionHandler: @escaping ((Result<[Gist]>)) -> Void) {
         Alamofire.request(GistRouter.GetMine())
             .responseArray(queue: nil) { (response) in
                 completionHandler(response.result)
