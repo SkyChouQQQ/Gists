@@ -23,7 +23,10 @@ class MasterViewController:UITableViewController {
         setupNaviBarUI()
         tableView.register(GistCell.self, forCellReuseIdentifier: cellId)
         
-         loadInitialData()
+        let defaults = UserDefaults.standard
+        if (!defaults.bool(forKey: "loadingOAuthToken")) {
+            loadInitialData()
+        }
 
     }
     

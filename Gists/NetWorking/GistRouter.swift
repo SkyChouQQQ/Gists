@@ -18,6 +18,7 @@ enum GistRouter:URLRequestConvertible {
     case GetPublic // GET https://api.github.com/gists/public
     case GetAtPath(String) // GET at given path
     case GetMyStarred //GET https://api.github.com/gists/starred
+    case GetMine() // GET https://api.github.com/gists
     
     var method: Alamofire.HTTPMethod {
         switch self {
@@ -26,6 +27,8 @@ enum GistRouter:URLRequestConvertible {
         case .GetAtPath:
             return .get
         case .GetMyStarred:
+            return .get
+        case .GetMine:
             return .get
         }
     }
@@ -40,7 +43,10 @@ enum GistRouter:URLRequestConvertible {
             return (relativePath, nil)
         case .GetMyStarred:
             return ("/gists/starred", nil)
+        case .GetMine:
+            return ("/gists", nil)
         }
+
     }
     
     func asURLRequest() throws -> URLRequest {
@@ -55,8 +61,12 @@ enum GistRouter:URLRequestConvertible {
 //        let credentialData = "\(username):\(password)".data(using: String.Encoding.utf8)!
 //        let base64Credentials = credentialData.base64EncodedString(options: [])
 //        uRLRequest.setValue("Basic \(base64Credentials)", forHTTPHeaderField: "Authorization")
-//
-        
+
+//        Set OAuth token if we have one
+        if let token = GitHubAPIManager.shared.OAuthToken {
+            uRLRequest.setValue("token \(token)", forHTTPHeaderField: "Authorization")
+        }
+//        set parameters
         if let parameters = result.parameters {
                 uRLRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
             }

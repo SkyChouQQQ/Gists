@@ -1,16 +1,13 @@
-# Uncomment the next line to define a global platform for your project
-  platform :ios, '9.0'
 
 target 'Gists' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
   # Pods for Gists
-    pod 'Alamofire',
-	:git => 'https://github.com/Alamofire/Alamofire.git',
-        :branch => 'master' 
+    pod 'Alamofire','~>4.4'
     pod 'SwiftyJSON'
     pod 'PINRemoteImage'
+    pod 'Locksmith'
 
   target 'GistsTests' do
     inherit! :search_paths

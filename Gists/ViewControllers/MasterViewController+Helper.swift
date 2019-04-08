@@ -28,6 +28,18 @@ extension MasterViewController:LoginViewDelegate,SFSafariViewControllerDelegate 
         
     }
     func loadInitialData() {
+        GitHubAPIManager.shared.OAuthTokenCompletionHandler = { (error) -> Void in
+            self.safariViewController?.dismiss(animated: true, completion: nil)
+            if let error = error {
+                print(error)
+                // TODO: handle error
+                // Something went wrong, try again
+                self.showOAuthLoginView()
+            } else {
+                self.loadGists()
+            }
+        }
+        
         if (!GitHubAPIManager.shared.hasOAuthToken()) {
             showOAuthLoginView()
         } else {
@@ -44,6 +56,10 @@ extension MasterViewController:LoginViewDelegate,SFSafariViewControllerDelegate 
     //MARK: - LoginViewDelegate method
     
     func didTapLoginButton() {
+        let defaults = UserDefaults.standard
+        defaults.set(true, forKey: "loadingOAuthToken")
+        
+        
         self.dismiss(animated: false, completion: nil)
         
         if let authURL = GitHubAPIManager.shared.URLToStartOAuth2Login() {
@@ -58,7 +74,8 @@ extension MasterViewController:LoginViewDelegate,SFSafariViewControllerDelegate 
     func safariViewController(_ controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
         // Detect not being able to load the OAuth URL
         if (!didLoadSuccessfully) {
-            // TODO: handle this better
+            let defaults = UserDefaults.standard
+            defaults.set(false, forKey: "loadingOAuthToken")
             controller.dismiss(animated: true, completion: nil)
         }
     }
