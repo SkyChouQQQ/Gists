@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		6D954332B110A5DC9E8F21C1 /* Pods_GistsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABFBB3854D0687FD175E948 /* Pods_GistsUITests.framework */; };
+		8453463E2259D6C50061054E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453463D2259D6C50061054E /* LoginViewController.swift */; };
+		845346402259F1F50061054E /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8453463F2259F1F50061054E /* SafariServices.framework */; };
+		84B090692254F91E00FC4627 /* MasterViewController+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B090682254F91E00FC4627 /* MasterViewController+Helper.swift */; };
+		84C7B83B22563BE600E385B9 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C7B83A22563BE600E385B9 /* File.swift */; };
 		9F5F641B22533DC700E2C8ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F641A22533DC700E2C8ED /* AppDelegate.swift */; };
 		9F5F642222533DC800E2C8ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F5F642122533DC800E2C8ED /* Assets.xcassets */; };
 		9F5F642522533DC800E2C8ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F5F642322533DC800E2C8ED /* LaunchScreen.storyboard */; };
@@ -48,6 +52,10 @@
 		03AF9DF49ED77F3AB8517BB8 /* Pods_GistsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GistsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ABFBB3854D0687FD175E948 /* Pods_GistsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GistsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D4C794E8AE4BF5BF6A8B482 /* Pods-Gists.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gists.debug.xcconfig"; path = "Target Support Files/Pods-Gists/Pods-Gists.debug.xcconfig"; sourceTree = "<group>"; };
+		8453463D2259D6C50061054E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8453463F2259F1F50061054E /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		84B090682254F91E00FC4627 /* MasterViewController+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MasterViewController+Helper.swift"; sourceTree = "<group>"; };
+		84C7B83A22563BE600E385B9 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		84DDAA0B5CF5583DF3311C05 /* Pods_Gists.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gists.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CE24F326D9E7B282435F62A /* Pods-GistsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GistsUITests.debug.xcconfig"; path = "Target Support Files/Pods-GistsUITests/Pods-GistsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		97385B9E9C714F68B786C5D4 /* Pods-GistsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GistsTests.debug.xcconfig"; path = "Target Support Files/Pods-GistsTests/Pods-GistsTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -82,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				845346402259F1F50061054E /* SafariServices.framework in Frameworks */,
 				A9A5761D3A0EE65B6241EBD6 /* Pods_Gists.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,6 +162,7 @@
 				9F5F642122533DC800E2C8ED /* Assets.xcassets */,
 				9F5F642622533DC800E2C8ED /* Info.plist */,
 				9FEF0AA62254B46000B24B1A /* Errors.swift */,
+				84C7B83A22563BE600E385B9 /* File.swift */,
 			);
 			path = Gists;
 			sourceTree = "<group>";
@@ -190,6 +200,8 @@
 			children = (
 				9F5F64482253481700E2C8ED /* MasterViewController.swift */,
 				9F5F644A2253489A00E2C8ED /* DetailViewController.swift */,
+				84B090682254F91E00FC4627 /* MasterViewController+Helper.swift */,
+				8453463D2259D6C50061054E /* LoginViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -246,6 +258,7 @@
 		C1BEE3CA8098A095878E9DFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8453463F2259F1F50061054E /* SafariServices.framework */,
 				84DDAA0B5CF5583DF3311C05 /* Pods_Gists.framework */,
 				03AF9DF49ED77F3AB8517BB8 /* Pods_GistsTests.framework */,
 				2ABFBB3854D0687FD175E948 /* Pods_GistsUITests.framework */,
@@ -486,8 +499,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8453463E2259D6C50061054E /* LoginViewController.swift in Sources */,
 				9F5F641B22533DC700E2C8ED /* AppDelegate.swift in Sources */,
 				9FEF0AAD2254DE9E00B24B1A /* GistCell.swift in Sources */,
+				84B090692254F91E00FC4627 /* MasterViewController+Helper.swift in Sources */,
 				9F5F64492253481700E2C8ED /* MasterViewController.swift in Sources */,
 				9FEF0AA22254AEDD00B24B1A /* ResponseJSONObjectSerializable.swift in Sources */,
 				9FEF0AAA2254D58000B24B1A /* UIImage+GistAPIManager.swift in Sources */,
@@ -495,6 +510,7 @@
 				9FE033852253671C00A7C7AF /* GistRouter.swift in Sources */,
 				9F5F644B2253489A00E2C8ED /* DetailViewController.swift in Sources */,
 				9FE033872253674700A7C7AF /* GitHubAPIManager.swift in Sources */,
+				84C7B83B22563BE600E385B9 /* File.swift in Sources */,
 				9FEF0AA72254B46000B24B1A /* Errors.swift in Sources */,
 				9FEF0AA52254AF7B00B24B1A /* AlamofireRequest+JSONSerializable.swift in Sources */,
 			);
@@ -674,7 +690,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = nextv.Gists;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -694,7 +710,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = nextv.Gists;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

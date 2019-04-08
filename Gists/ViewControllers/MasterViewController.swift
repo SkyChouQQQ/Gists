@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import SafariServices
 
 class MasterViewController:UITableViewController {
     
     var gists = [Gist]()
     let cellId = "cellId"
+    var safariViewController:SFSafariViewController?
     
     //MARK:-VC life cycle
     
@@ -20,6 +22,8 @@ class MasterViewController:UITableViewController {
         
         setupNaviBarUI()
         tableView.register(GistCell.self, forCellReuseIdentifier: cellId)
+        
+         loadInitialData()
 
     }
     
@@ -31,7 +35,11 @@ class MasterViewController:UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+       
+        
         loadGists()
+
+//        GitHubAPIManager.shared.printMyStarredGistsWithBasicAuth()
     }
     
     //MARK:- target function
@@ -60,21 +68,7 @@ class MasterViewController:UITableViewController {
 
     }
     
-    //MARK:- VC Helper function
-    fileprivate func loadGists() {
-        GitHubAPIManager.shared.printPublicGists { (result) in
-            guard result.error == nil else {
-                print(result.error)
-                // TODO: display error
-                return
-            }
-            if let fetchedGists = result.value {
-                self.gists = fetchedGists
-            }
-            self.tableView.reloadData()
-        }
-        
-    }
+
     
     //MARK:- memory warning
     override func didReceiveMemoryWarning() {
@@ -126,3 +120,5 @@ extension MasterViewController {
     }
 
 }
+
+

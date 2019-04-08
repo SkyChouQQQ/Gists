@@ -6,7 +6,9 @@ target 'Gists' do
   use_frameworks!
 
   # Pods for Gists
-    pod 'Alamofire', '~> 4.4' 
+    pod 'Alamofire',
+	:git => 'https://github.com/Alamofire/Alamofire.git',
+        :branch => 'master' 
     pod 'SwiftyJSON'
     pod 'PINRemoteImage'
 

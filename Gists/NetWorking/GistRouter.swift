@@ -13,11 +13,19 @@ enum GistRouter:URLRequestConvertible {
     
     static let baseURLString:String = "https://api.github.com"
     
+    
+    
     case GetPublic // GET https://api.github.com/gists/public
+    case GetAtPath(String) // GET at given path
+    case GetMyStarred //GET https://api.github.com/gists/starred
     
     var method: Alamofire.HTTPMethod {
         switch self {
         case .GetPublic:
+            return .get
+        case .GetAtPath:
+            return .get
+        case .GetMyStarred:
             return .get
         }
     }
@@ -26,16 +34,35 @@ enum GistRouter:URLRequestConvertible {
         switch self {
         case .GetPublic:
             return ("/gists/public", nil)
+        case .GetAtPath(let path):
+            let URL = NSURL(string: path)
+            let relativePath = URL!.relativePath!
+            return (relativePath, nil)
+        case .GetMyStarred:
+            return ("/gists/starred", nil)
         }
     }
     
-    
-    
     func asURLRequest() throws -> URLRequest {
-        let URL = NSURL(string: GistRouter.baseURLString)!
         
+        let URL = NSURL(string: GistRouter.baseURLString)!
         var uRLRequest = URLRequest(url: URL.appendingPathComponent(result.path)!)
         uRLRequest.httpMethod = method.rawValue
-        return try Alamofire.JSONEncoding.default.encode(uRLRequest, with: result.parameters)
+        
+         // basic auth test code
+//        let username = "SkyChouQQQ"
+//        let password = "Aaaa230487"
+//        let credentialData = "\(username):\(password)".data(using: String.Encoding.utf8)!
+//        let base64Credentials = credentialData.base64EncodedString(options: [])
+//        uRLRequest.setValue("Basic \(base64Credentials)", forHTTPHeaderField: "Authorization")
+//
+        
+        if let parameters = result.parameters {
+                uRLRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            }
+        
+        
+        return uRLRequest
+
     }
 }
