@@ -205,7 +205,7 @@ extension GitHubAPIManager {
     // API call without authentication
 
     
-        // MARK: - OAuth flow
+        // OAuth flow
     func hasOAuthToken() -> Bool {
         if let token = self.OAuthToken {
             return !token.isEmpty
@@ -298,4 +298,61 @@ extension GitHubAPIManager {
         return nil
     }
     
+
+    //MARK:- Starred
+    
+    func isGistStarred(gistId: String, completionHandler: @escaping (Result<Bool>) -> Void) {
+        // GET /gists/:id/star
+        alamofireManager.request(GistRouter.IsStarred(gistId))
+            .validate(statusCode: [204])
+            .response { (response) in
+                // auth check
+                if let urlResponse = response.response, let authError = self.checkUnauthorized(urlResponse: urlResponse) {
+                    completionHandler(.failure(authError))
+                    return
+                }
+                // 204 if starred, 404 if not
+                if let error = response.error {
+                    print(error)
+                    if response.response?.statusCode == 404 {
+                        completionHandler(.success(false))
+                        return
+                    }
+                    completionHandler(.failure(error))
+                    return
+                }
+                completionHandler(.success(true))
+        }
+    }
+    func starGist(gistId: String, completionHandler: @escaping(Error?) -> Void) {
+        alamofireManager.request(GistRouter.Star(gistId))
+            .response { (response) in
+                // auth check
+                if let urlResponse = response.response, let authError = self.checkUnauthorized(urlResponse: urlResponse) {
+                    completionHandler(authError)
+                    return
+                }
+                
+                if let error = response.error {
+                    print(error)
+                    return
+                }
+                completionHandler(response.error)
+        }
+    }
+    func unstarGist(gistId: String, completionHandler: @escaping(Error?) -> Void) {
+        alamofireManager.request(GistRouter.Unstar(gistId))
+            .response { (response) in
+                // auth check
+                if let urlResponse = response.response, let authError = self.checkUnauthorized(urlResponse: urlResponse) {
+                    completionHandler(authError)
+                    return
+                }
+                if let error = response.error {
+                    print(error)
+                    return
+                }
+                completionHandler(response.error)
+        }
+    }
 }
