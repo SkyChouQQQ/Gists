@@ -39,7 +39,7 @@ class MasterViewController:UITableViewController {
         super.viewDidAppear(animated)
         
        
-        
+        loadPublicGists()
 
 //        GitHubAPIManager.shared.printMyStarredGistsWithBasicAuth()
     }
