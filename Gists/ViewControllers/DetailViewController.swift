@@ -136,7 +136,7 @@ extension DetailViewController {
                     if error.domain == NSURLErrorDomain &&
                         error.code == NSURLErrorUserAuthenticationRequired {
                         self.alertController = UIAlertController(title: "Could not star gist",
-                                                                 message: error.description, preferredStyle: .Alert)
+                                                                 message: error.description, preferredStyle: .alert)
                     } else {
                         self.alertController = UIAlertController(title: "Could not star gist",
                                                                  message: "Sorry, your gist couldn't be starred. " +
@@ -161,9 +161,23 @@ extension DetailViewController {
                 (error) in
                 if let error = error {
                     print(error)
+                    if error.domain == NSURLErrorDomain &&
+                        error.code == NSURLErrorUserAuthenticationRequired {
+                        self.alertController = UIAlertController(title: "Could not unstar gist",
+                                                                 message: error.description, preferredStyle: .alert)
+                    } else {
+                        self.alertController = UIAlertController(title: "Could not unstar gist",
+                                                                 message: "Sorry, your gist couldn't be unstarred. " +
+                            " Maybe GitHub is down or you don't have an internet connection.",
+                                                                 preferredStyle: .alert)
+                    }
+                    // add ok button
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    self.alertController?.addAction(okAction)
+                    self.present(self.alertController!, animated:true, completion: nil)
                 } else {
                     self.isStarred = false
-                    self.detailTableView?.insertRows(at:[IndexPath(row: 2, section: 0)],with: .automatic)
+                   self.detailTableView?.insertRows(at:[IndexPath(row: 2, section: 0)],with: .automatic)
                 }
             })
         }

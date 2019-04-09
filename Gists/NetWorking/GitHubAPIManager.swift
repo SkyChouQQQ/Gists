@@ -324,7 +324,7 @@ extension GitHubAPIManager {
                 completionHandler(.success(true))
         }
     }
-    func starGist(gistId: String, completionHandler: @escaping(Error?) -> Void) {
+    func starGist(gistId: String, completionHandler: @escaping(NSError?) -> Void) {
         alamofireManager.request(GistRouter.Star(gistId))
             .response { (response) in
                 // auth check
@@ -337,10 +337,10 @@ extension GitHubAPIManager {
                     print(error)
                     return
                 }
-                completionHandler(response.error)
+                completionHandler(response.error as NSError?)
         }
     }
-    func unstarGist(gistId: String, completionHandler: @escaping(Error?) -> Void) {
+    func unstarGist(gistId: String, completionHandler: @escaping(NSError?) -> Void) {
         alamofireManager.request(GistRouter.Unstar(gistId))
             .response { (response) in
                 // auth check
@@ -352,7 +352,7 @@ extension GitHubAPIManager {
                     print(error)
                     return
                 }
-                completionHandler(response.error)
+                completionHandler(response.error as NSError?)
         }
     }
 }

@@ -14,6 +14,7 @@ class MasterViewController:UITableViewController {
     var gists = [Gist]()
     let cellId = "cellId"
     var safariViewController:SFSafariViewController?
+    var gistSegmentedControl:UISegmentedControl?
     
     //MARK:-VC life cycle
     
@@ -60,10 +61,13 @@ class MasterViewController:UITableViewController {
     @objc func segmentControlIndexChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex{
         case 0:
+            self.navigationItem.leftBarButtonItem = nil
             loadPublicGists()
         case 1:
+            self.navigationItem.leftBarButtonItem = nil
             loadStarrredGists()
         case 2:
+            self.navigationItem.leftBarButtonItem = self.editButtonItem()
             loadMyGists()
         default:
             break
@@ -75,8 +79,6 @@ class MasterViewController:UITableViewController {
     }
     
     fileprivate func setupNaviBarUI() {
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
-        
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addGist))
         self.navigationItem.rightBarButtonItem = addButton
         
@@ -86,6 +88,7 @@ class MasterViewController:UITableViewController {
         let customView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 250))
         let items = ["All" , "Star","My Gists"]
         let segmentedControl = UISegmentedControl(items : items)
+        self.gistSegmentedControl = segmentedControl
         segmentedControl.center = self.view.center
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self, action: #selector(segmentControlIndexChanged), for: .valueChanged)
@@ -149,6 +152,12 @@ extension MasterViewController {
             // Create a new instance of the appropriate class, insert it into the array,
             // and add a new row to the table view.
         }
+    }
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath:
+        NSIndexPath) -> Bool {
+        // only allow editing my gists
+        guard let gistSegmentedControl = gistSegmentedControl else {return false}
+        return gistSegmentedControl.selectedSegmentIndex == 2
     }
 
 }
