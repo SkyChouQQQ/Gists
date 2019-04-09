@@ -122,7 +122,11 @@ class GitHubAPIManager {
         }
         
     }
-
+    
+    func clearCache() {
+        let cache = URLCache.shared
+        cache.removeAllCachedResponses()
+    }
     
 }
 
@@ -353,6 +357,59 @@ extension GitHubAPIManager {
                     return
                 }
                 completionHandler(response.error as NSError?)
+        }
+    }
+    
+    //MARK:- Delete
+    
+    func deleteGist(gistId: String, completionHandler: @escaping(NSError?) -> Void) {
+        alamofireManager.request(GistRouter.Delete(gistId))
+            .response { (response) in
+                if let urlResponse = response.response, let authError = self.checkUnauthorized(urlResponse: urlResponse) {
+                    completionHandler(authError)
+                    return
+                }
+                if let error = response.error {
+                    print(error)
+                    return
+                }
+                completionHandler(response.error as NSError?)
+        }
+    }
+    
+     //MARK:- Create
+    
+    func createNewGist(description: String, isPublic: Bool, files: [File], completionHandler:@escaping
+        (Result<Bool>) -> Void) {
+        let publicString: String
+        if isPublic {
+            publicString = "true"
+        } else {
+            publicString = "false"
+        }
+        var filesDictionary = [String: AnyObject]()
+        for file in files {
+            if let name = file.filename, let content = file.content {
+                filesDictionary[name] = ["content": content] as AnyObject
+            }
+        }
+        let parameters:[String: AnyObject] = [
+            "description": description as AnyObject,
+            "isPublic": publicString as AnyObject,
+            "files" : filesDictionary as AnyObject
+        ]
+        alamofireManager.request(GistRouter.Create(parameters))
+            .response { (response) in
+                if let urlResponse = response.response, let authError = self.checkUnauthorized(urlResponse: urlResponse) {
+                    completionHandler(.failure(authError))
+                    return
+                }
+                if let error = response.error {
+                    print(error)
+                    completionHandler(.success(false))
+                    return
+                }
+                completionHandler(.success(true))
         }
     }
 }

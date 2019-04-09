@@ -41,33 +41,37 @@ class MasterViewController:UITableViewController {
         
        
         loadPublicGists()
+        
 
-//        GitHubAPIManager.shared.printMyStarredGistsWithBasicAuth()
+        GitHubAPIManager.shared.printMyStarredGistsWithBasicAuth()
     }
     
     //MARK:- target function
     @objc func addGist() {
-        let alert = UIAlertController(title: "Not Implemented", message:
-            "Can't create new gists yet, will implement later",
-                                      preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default,
-                                      handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        let createGistVC = CreateGistViewController()
+        self.navigationController?.pushViewController(createGistVC, animated: true)
     }
     @objc func editGist() {
         
     }
     
     @objc func segmentControlIndexChanged(_ sender: UISegmentedControl) {
+        self.gists = [Gist]()
+        self.tableView.reloadData()
         switch sender.selectedSegmentIndex{
         case 0:
             self.navigationItem.leftBarButtonItem = nil
+            self.navigationItem.rightBarButtonItem = nil
             loadPublicGists()
         case 1:
             self.navigationItem.leftBarButtonItem = nil
+            self.navigationItem.rightBarButtonItem = nil
             loadStarrredGists()
         case 2:
             self.navigationItem.leftBarButtonItem = self.editButtonItem()
+            let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self,
+                                            action: #selector(addGist))
+            self.navigationItem.rightBarButtonItem = addButton
             loadMyGists()
         default:
             break
@@ -79,9 +83,6 @@ class MasterViewController:UITableViewController {
     }
     
     fileprivate func setupNaviBarUI() {
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addGist))
-        self.navigationItem.rightBarButtonItem = addButton
-        
         setupNaviTitleViewWithSegmentControl()
     }
     fileprivate func setupNaviTitleViewWithSegmentControl() {
@@ -159,7 +160,35 @@ extension MasterViewController {
         guard let gistSegmentedControl = gistSegmentedControl else {return false}
         return gistSegmentedControl.selectedSegmentIndex == 2
     }
-
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle:
+        UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let gistToBeDeleted = gists.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            // delete from API
+            if let id = gists[indexPath.row].id {
+                GitHubAPIManager.shared.deleteGist(gistId: id, completionHandler: {
+                    (error) in
+                    print(error)
+                    if let _ = error {
+                        // Put it back
+                        self.gists.insert(gistToBeDeleted, at: indexPath.row)
+                        tableView.insertRows(at: [indexPath], with: .right)
+                        // tell them it didn't work
+                        let alertController = UIAlertController(title: "Could not delete gist",
+                                                                message: "Sorry, your gist couldn't be deleted. Maybe GitHub is "
+                                                                    + "down or you don't have an internet connection.",
+                                                                preferredStyle: .alert)
+                        // add ok button
+                        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        alertController.addAction(okAction)
+                        // show the alert
+                        self.present(alertController, animated:true, completion: nil)
+                    }
+                })
+            }
+        }
+    }
 }
 
 

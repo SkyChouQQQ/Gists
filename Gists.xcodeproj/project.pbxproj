@@ -13,6 +13,8 @@
 		84B090692254F91E00FC4627 /* MasterViewController+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B090682254F91E00FC4627 /* MasterViewController+Helper.swift */; };
 		84C7B83B22563BE600E385B9 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C7B83A22563BE600E385B9 /* File.swift */; };
 		9F160A4F225AFC370038C862 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F160A4E225AFC370038C862 /* Files.swift */; };
+		9F1AB4A2225C3A8C007858AD /* CreateGistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1AB4A1225C3A8C007858AD /* CreateGistViewController.swift */; };
+		9F1AB4A5225C4AD3007858AD /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1AB4A4225C4AD3007858AD /* PersistenceManager.swift */; };
 		9F5F641B22533DC700E2C8ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F641A22533DC700E2C8ED /* AppDelegate.swift */; };
 		9F5F642222533DC800E2C8ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F5F642122533DC800E2C8ED /* Assets.xcassets */; };
 		9F5F642522533DC800E2C8ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F5F642322533DC800E2C8ED /* LaunchScreen.storyboard */; };
@@ -61,6 +63,8 @@
 		8CE24F326D9E7B282435F62A /* Pods-GistsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GistsUITests.debug.xcconfig"; path = "Target Support Files/Pods-GistsUITests/Pods-GistsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		97385B9E9C714F68B786C5D4 /* Pods-GistsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GistsTests.debug.xcconfig"; path = "Target Support Files/Pods-GistsTests/Pods-GistsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9F160A4E225AFC370038C862 /* Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
+		9F1AB4A1225C3A8C007858AD /* CreateGistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGistViewController.swift; sourceTree = "<group>"; };
+		9F1AB4A4225C4AD3007858AD /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		9F5F641722533DC700E2C8ED /* Gists.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gists.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F5F641A22533DC700E2C8ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F5F642122533DC800E2C8ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -129,6 +133,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		9F1AB4A3225C4849007858AD /* Core Modules */ = {
+			isa = PBXGroup;
+			children = (
+				9F1AB4A4225C4AD3007858AD /* PersistenceManager.swift */,
+			);
+			path = "Core Modules";
+			sourceTree = "<group>";
+		};
 		9F5F640E22533DC700E2C8ED = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +166,7 @@
 		9F5F641922533DC700E2C8ED /* Gists */ = {
 			isa = PBXGroup;
 			children = (
+				9F1AB4A3225C4849007858AD /* Core Modules */,
 				9FEF0AAB2254DE9100B24B1A /* Cell */,
 				9FEF0AA82254D55700B24B1A /* Utils */,
 				9FEF0AA02254AEB500B24B1A /* Protocol */,
@@ -204,6 +217,7 @@
 				9F5F644A2253489A00E2C8ED /* DetailViewController.swift */,
 				84B090682254F91E00FC4627 /* MasterViewController+Helper.swift */,
 				8453463D2259D6C50061054E /* LoginViewController.swift */,
+				9F1AB4A1225C3A8C007858AD /* CreateGistViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -458,6 +472,7 @@
 				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
 				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/XLForm/XLForm.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -469,6 +484,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLForm.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -507,6 +523,7 @@
 				8453463E2259D6C50061054E /* LoginViewController.swift in Sources */,
 				9F5F641B22533DC700E2C8ED /* AppDelegate.swift in Sources */,
 				9F160A4F225AFC370038C862 /* Files.swift in Sources */,
+				9F1AB4A2225C3A8C007858AD /* CreateGistViewController.swift in Sources */,
 				9FEF0AAD2254DE9E00B24B1A /* GistCell.swift in Sources */,
 				84B090692254F91E00FC4627 /* MasterViewController+Helper.swift in Sources */,
 				9F5F64492253481700E2C8ED /* MasterViewController.swift in Sources */,
@@ -514,6 +531,7 @@
 				9FEF0AAA2254D58000B24B1A /* UIImage+GistAPIManager.swift in Sources */,
 				9FE0338C225368F400A7C7AF /* Gist.swift in Sources */,
 				9FE033852253671C00A7C7AF /* GistRouter.swift in Sources */,
+				9F1AB4A5225C4AD3007858AD /* PersistenceManager.swift in Sources */,
 				9F5F644B2253489A00E2C8ED /* DetailViewController.swift in Sources */,
 				9FE033872253674700A7C7AF /* GitHubAPIManager.swift in Sources */,
 				84C7B83B22563BE600E385B9 /* File.swift in Sources */,

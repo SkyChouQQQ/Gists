@@ -9,7 +9,8 @@
 import Foundation
 import SwiftyJSON
 
-class Gist:ResponseJSONObjectSerializable {
+class Gist:ResponseJSONObjectSerializable,NSCoding {
+    
     var id: String?
     var description: String?
     var ownerLogin: String?
@@ -55,5 +56,30 @@ class Gist:ResponseJSONObjectSerializable {
         aDateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         aDateFormatter.locale = Locale(identifier: "en_US_POSIX")
         return aDateFormatter
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.id, forKey: "id")
+        aCoder.encode(self.description, forKey: "gistDescription")
+        aCoder.encode(self.ownerLogin, forKey: "ownerLogin")
+        aCoder.encode(self.ownerAvatarURL, forKey: "ownerAvatarURL")
+        aCoder.encode(self.url, forKey: "url")
+        aCoder.encode(self.createdAt, forKey: "createdAt")
+        aCoder.encode(self.updatedAt, forKey: "updatedAt")
+        if let files = self.files {
+            aCoder.encode(files, forKey: "files")
+        }
+    }
+    required convenience init?(coder aDecoder: NSCoder) {
+        self.init()
+        self.id = aDecoder.decodeObject(forKey: "id") as? String
+        self.description = aDecoder.decodeObject(forKey: "gistDescription") as? String
+        self.ownerLogin = aDecoder.decodeObject(forKey: "ownerLogin") as? String
+        self.ownerAvatarURL = aDecoder.decodeObject(forKey: "ownerAvatarURL") as? String
+        self.createdAt = aDecoder.decodeObject(forKey: "createdAt") as? Date
+        self.updatedAt = aDecoder.decodeObject(forKey: "updatedAt") as? Date
+        if let files = aDecoder.decodeObject(forKey: "files") as? [File] {
+            self.files = files
+        }
     }
 }

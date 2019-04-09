@@ -8,7 +8,7 @@ target 'Gists' do
     pod 'SwiftyJSON'
     pod 'PINRemoteImage'
     pod 'Locksmith'
-
+    pod 'XLForm'
   target 'GistsTests' do
     inherit! :search_paths
     # Pods for testing
